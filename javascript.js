@@ -1,3 +1,7 @@
+let inputNumOne;
+let inputOperator;
+let inputNumTwo;
+
 function add(numOne, numTwo) {
   return numOne + numTwo;
 }
