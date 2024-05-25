@@ -71,11 +71,13 @@ function divide(numOne, numTwo) {
 
 function addBtnEqualsOperatorEventListener(btn) {
   btn.addEventListener("click", () => {
-    let result = operate(inputNumOne, inputOperator, inputNumTwo)
-    if (numsTurn === 2) displayField.textContent = `${result}`;
-    inputNumOne = result;
-    inputNumTwo = "";
-    numsTurn = 1;
+    if (inputNumTwo !== "") {
+      let result = operate(inputNumOne, inputOperator, inputNumTwo)
+      if (numsTurn === 2) displayField.textContent = `${result}`;
+      inputNumOne = result;
+      inputNumTwo = "";
+      numsTurn = 1;
+    }
   })
 };
 
