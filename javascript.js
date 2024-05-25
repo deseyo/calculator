@@ -1,4 +1,8 @@
 const displayField = document.querySelector("#calculator-display");
+const btnOperatorAdd = document.querySelector("#btn-operator-add");
+const btnOperatorSubtract = document.querySelector("#btn-operator-subtract");
+const btnOperatorMultiply = document.querySelector("#btn-operator-multiply");
+const btnOperatorDivide = document.querySelector("#btn-operator-divide");
 const btnNumZero = document.querySelector("#btn-num-zero");
 const btnNumOne = document.querySelector("#btn-num-one");
 const btnNumTwo = document.querySelector("#btn-num-two");
@@ -10,16 +14,21 @@ const btnNumSeven = document.querySelector("#btn-num-seven");
 const btnNumEight = document.querySelector("#btn-num-eight");
 const btnNumNine = document.querySelector("#btn-num-nine");
 
-addBtnEventListener(btnNumZero, 0);
-addBtnEventListener(btnNumOne, 1);
-addBtnEventListener(btnNumTwo, 2);
-addBtnEventListener(btnNumThree, 3);
-addBtnEventListener(btnNumFour, 4);
-addBtnEventListener(btnNumFive, 5);
-addBtnEventListener(btnNumSix, 6);
-addBtnEventListener(btnNumSeven, 7)
-addBtnEventListener(btnNumEight, 8);
-addBtnEventListener(btnNumNine, 9);
+addBtnOperatorEventListener(btnOperatorAdd, "+");
+addBtnOperatorEventListener(btnOperatorSubtract, "-");
+addBtnOperatorEventListener(btnOperatorMultiply, "*");
+addBtnOperatorEventListener(btnOperatorDivide, "/");
+
+addBtnNumEventListener(btnNumZero, 0);
+addBtnNumEventListener(btnNumOne, 1);
+addBtnNumEventListener(btnNumTwo, 2);
+addBtnNumEventListener(btnNumThree, 3);
+addBtnNumEventListener(btnNumFour, 4);
+addBtnNumEventListener(btnNumFive, 5);
+addBtnNumEventListener(btnNumSix, 6);
+addBtnNumEventListener(btnNumSeven, 7)
+addBtnNumEventListener(btnNumEight, 8);
+addBtnNumEventListener(btnNumNine, 9);
 
 let numsTurn = 1;
 let inputNumOne = "";
@@ -57,7 +66,15 @@ function divide(numOne, numTwo) {
   return numOne / numTwo;
 }
 
-function addBtnEventListener(btn, num) {
+function addBtnOperatorEventListener(btn, operator) {
+  btn.addEventListener("click", () => {
+    displayField.textContent = "";
+    inputOperator = operator;
+    numsTurn = 2;
+  });
+}
+
+function addBtnNumEventListener(btn, num) {
   btn.addEventListener("click", () => {
     displayField.textContent += num;
     if (numsTurn === 1) inputNumOne += num;
