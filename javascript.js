@@ -73,7 +73,12 @@ function addBtnEqualsOperatorEventListener(btn) {
   btn.addEventListener("click", () => {
     if (inputNumTwo !== "") {
       let result = operate(inputNumOne, inputOperator, inputNumTwo)
-      if (numsTurn === 2) displayField.textContent = `${result}`;
+      // if num is not decimal return true else false
+      if (result - Math.floor(result) === 0 || result.toString().length < 9) displayField.textContent = `${result}`;
+      else {
+        let decimals = 9 - Math.floor(result).toString().length;
+        displayField.textContent = `${result.toFixed(decimals)}`
+      }
       inputNumOne = result;
       inputNumTwo = "";
       numsTurn = 1;
@@ -86,7 +91,12 @@ function addBtnMathOperatorEventListener(btn, operator) {
     if (numsTurn === 2) {
       if (inputNumTwo !== "") {
           let result = operate(inputNumOne, inputOperator, inputNumTwo)
-          displayField.textContent = `${result}`;
+          // if num is not decimal return true else false
+          if (result - Math.floor(result) === 0 || result.toString().length < 9) displayField.textContent = `${result}`;
+          else {
+            let decimals = 9 - Math.floor(result).toString().length;
+            displayField.textContent = `${result.toFixed(decimals)}`
+          }
           inputNumOne = result;
           inputNumTwo = "";
           inputOperator = operator;
