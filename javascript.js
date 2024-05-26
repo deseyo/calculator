@@ -83,16 +83,32 @@ function addBtnEqualsOperatorEventListener(btn) {
 
 function addBtnMathOperatorEventListener(btn, operator) {
   btn.addEventListener("click", () => {
-    displayField.textContent = "";
-    inputOperator = operator;
-    numsTurn = 2;
+    if (numsTurn === 2) {
+      if (inputNumTwo !== "") {
+          let result = operate(inputNumOne, inputOperator, inputNumTwo)
+          displayField.textContent = `${result}`;
+          inputNumOne = result;
+          inputNumTwo = "";
+          inputOperator = operator;
+      }
+    } else {
+      inputOperator = operator;
+      numsTurn = 2;
+    }
   });
 }
 
 function addBtnNumEventListener(btn, num) {
   btn.addEventListener("click", () => {
-    displayField.textContent += num;
-    if (numsTurn === 1) inputNumOne += num;
-    else if (numsTurn === 2) inputNumTwo += num;
+    switch (numsTurn)  {
+      case 1:
+        if (numsTurn === 1 && inputNumOne === "") displayField.textContent = "", displayField.textContent += num, inputNumOne += num;
+        else displayField.textContent += num, inputNumOne += num;
+        break;
+      case 2:
+        if (numsTurn === 2 && inputNumTwo === "") displayField.textContent = "", displayField.textContent += num, inputNumTwo += num;
+        else displayField.textContent += num, inputNumTwo += num;
+        break;
+    }    
   });
 }
