@@ -1,4 +1,5 @@
 const displayField = document.querySelector("#calculator-display");
+const btnOperatorClear = document.querySelector("#btn-operator-clear");
 const btnOperatorEquals = document.querySelector("#btn-operator-equals");
 const btnOperatorAdd = document.querySelector("#btn-operator-add");
 const btnOperatorSubtract = document.querySelector("#btn-operator-subtract");
@@ -14,6 +15,8 @@ const btnNumSix = document.querySelector("#btn-num-six");
 const btnNumSeven = document.querySelector("#btn-num-seven");
 const btnNumEight = document.querySelector("#btn-num-eight");
 const btnNumNine = document.querySelector("#btn-num-nine");
+
+addBtnClearOperatorEventListener(btnOperatorClear);
 
 addBtnEqualsOperatorEventListener(btnOperatorEquals);
 
@@ -67,6 +70,16 @@ function multiply(numOne, numTwo) {
 
 function divide(numOne, numTwo) {
   return numOne / numTwo;
+}
+
+function addBtnClearOperatorEventListener(btn) {
+  btn.addEventListener("click", () => {
+    displayField.textContent = "0";
+    numsTurn = 1;
+    inputNumOne = "";
+    inputOperator = "";
+    inputNumTwo = "";
+  })
 }
 
 function addBtnEqualsOperatorEventListener(btn) {
