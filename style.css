@@ -21,6 +21,9 @@ body {
 }
 
 .calculator-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
   width: 390px;
   padding: 0 20px 20px 20px;
   border-radius: 15px;
@@ -33,7 +36,8 @@ body {
   align-items: center;
   font-size: 55px;
   height: 90px;
-  width: 323px;
+  width: 330px;
+  padding: 0 10px;
   color: black;
 }
 
