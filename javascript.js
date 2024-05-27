@@ -96,10 +96,13 @@ function addBtnEqualsOperatorEventListener(btn) {
       } else {
         let result = operate(inputNumOne, inputOperator, inputNumTwo)
         // if num is not decimal return true else false
-        if (result - Math.floor(result) === 0 || result.toString().length < 9) displayField.textContent = `${result}`;
+        if (result - Math.floor(result) === 0 && result.toString().length < 9 || result.toString().length < 9) displayField.textContent = `${result}`;
         else {
-          let decimals = 9 - Math.floor(result).toString().length;
-          displayField.textContent = `${result.toFixed(decimals)}`
+          if (result - Math.floor(result) === 0) result = roundIntegerResultToNineDigits(result), displayField.textContent = result;
+          else {
+            let decimals = 9 - Math.floor(result).toString().length;
+            displayField.textContent = `${result.toFixed(decimals)}`
+          } 
         }
         inputNumOne = result;
         inputNumTwo = "";
@@ -163,13 +166,24 @@ function addBtnNumEventListener(btn, num) {
   btn.addEventListener("click", () => {
     switch (numsTurn)  {
       case 1:
-        if (numsTurn === 1 && inputNumOne === "") displayField.textContent = "", displayField.textContent += num, inputNumOne += num;
-        else displayField.textContent += num, inputNumOne += num;
+        if (inputNumOne.length < 9) {
+          if (numsTurn === 1 && inputNumOne === "") displayField.textContent = "", displayField.textContent += num, inputNumOne += num;
+          else displayField.textContent += num, inputNumOne += num;
+        }
         break;
       case 2:
-        if (numsTurn === 2 && inputNumTwo === "") displayField.textContent = "", displayField.textContent += num, inputNumTwo += num;
-        else displayField.textContent += num, inputNumTwo += num;
+        if (inputNumTwo.length < 9) {
+          if (numsTurn === 2 && inputNumTwo === "") displayField.textContent = "", displayField.textContent += num, inputNumTwo += num;
+          else displayField.textContent += num, inputNumTwo += num;
+        }
         break;
     }    
   });
+}
+
+function roundIntegerResultToNineDigits(num) {
+  let numArr = Array.from(String(num))
+  let numArrSliced = numArr.slice(0, 9);
+  if (numArr[9] > 4) numArrSliced[8] = +numArrSliced[8] + 1;
+  return +numArrSliced.join("");
 }
