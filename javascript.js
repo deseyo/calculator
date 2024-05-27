@@ -1,6 +1,7 @@
 const displayField = document.querySelector("#calculator-display");
 const btnOperatorClear = document.querySelector("#btn-operator-clear");
 const btnOperatorEquals = document.querySelector("#btn-operator-equals");
+const btnOperatorDot = document.querySelector("#btn-operator-dot")
 const btnOperatorAdd = document.querySelector("#btn-operator-add");
 const btnOperatorSubtract = document.querySelector("#btn-operator-subtract");
 const btnOperatorMultiply = document.querySelector("#btn-operator-multiply");
@@ -19,6 +20,8 @@ const btnNumNine = document.querySelector("#btn-num-nine");
 addBtnClearOperatorEventListener(btnOperatorClear);
 
 addBtnEqualsOperatorEventListener(btnOperatorEquals);
+
+addBtnDotOperatorEventListener(btnOperatorDot);
 
 addBtnMathOperatorEventListener(btnOperatorAdd, "+");
 addBtnMathOperatorEventListener(btnOperatorSubtract, "-");
@@ -105,6 +108,27 @@ function addBtnEqualsOperatorEventListener(btn) {
     }
   })
 };
+
+function addBtnDotOperatorEventListener(btn) {
+  btn.addEventListener("click", () => {
+    switch (numsTurn) {
+      case 1:
+        if (Array.from(inputNumOne).includes(".")) break;
+        else {
+          displayField.textContent += ".";
+          inputNumOne += ".";
+          break;
+        }
+      case 2:
+        if (Array.from(inputNumTwo).includes(".")) break;
+        else {
+          displayField.textContent += ".";
+          inputNumTwo += ".";
+          break;
+        } 
+    }
+  })
+}
 
 function addBtnMathOperatorEventListener(btn, operator) {
   btn.addEventListener("click", () => {
