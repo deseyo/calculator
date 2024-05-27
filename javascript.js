@@ -85,16 +85,23 @@ function addBtnClearOperatorEventListener(btn) {
 function addBtnEqualsOperatorEventListener(btn) {
   btn.addEventListener("click", () => {
     if (inputNumTwo !== "") {
-      let result = operate(inputNumOne, inputOperator, inputNumTwo)
-      // if num is not decimal return true else false
-      if (result - Math.floor(result) === 0 || result.toString().length < 9) displayField.textContent = `${result}`;
-      else {
-        let decimals = 9 - Math.floor(result).toString().length;
-        displayField.textContent = `${result.toFixed(decimals)}`
+      if (inputNumTwo === "0" && inputOperator === "/") {
+        displayField.textContent = "Nice try";
+        numsTurn = 1;
+        inputNumOne = "";
+        inputNumTwo = "";
+      } else {
+        let result = operate(inputNumOne, inputOperator, inputNumTwo)
+        // if num is not decimal return true else false
+        if (result - Math.floor(result) === 0 || result.toString().length < 9) displayField.textContent = `${result}`;
+        else {
+          let decimals = 9 - Math.floor(result).toString().length;
+          displayField.textContent = `${result.toFixed(decimals)}`
+        }
+        inputNumOne = result;
+        inputNumTwo = "";
+        numsTurn = 1;
       }
-      inputNumOne = result;
-      inputNumTwo = "";
-      numsTurn = 1;
     }
   })
 };
@@ -103,6 +110,12 @@ function addBtnMathOperatorEventListener(btn, operator) {
   btn.addEventListener("click", () => {
     if (numsTurn === 2) {
       if (inputNumTwo !== "") {
+        if (inputNumTwo === "0" && inputOperator === "/") {
+          displayField.textContent = "Nice try";
+          numsTurn = 1;
+          inputNumOne = "";
+          inputNumTwo = "";
+        } else {
           let result = operate(inputNumOne, inputOperator, inputNumTwo)
           // if num is not decimal return true else false
           if (result - Math.floor(result) === 0 || result.toString().length < 9) displayField.textContent = `${result}`;
@@ -113,6 +126,7 @@ function addBtnMathOperatorEventListener(btn, operator) {
           inputNumOne = result;
           inputNumTwo = "";
           inputOperator = operator;
+        }
       }
     } else {
       inputOperator = operator;
