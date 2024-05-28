@@ -145,10 +145,13 @@ function addBtnMathOperatorEventListener(btn, operator) {
         } else {
           let result = operate(inputNumOne, inputOperator, inputNumTwo)
           // if num is not decimal return true else false
-          if (result - Math.floor(result) === 0 || result.toString().length < 9) displayField.textContent = `${result}`;
+          if (result - Math.floor(result) === 0 && result.toString().length < 9 || result.toString().length < 9) displayField.textContent = `${result}`;
           else {
-            let decimals = 9 - Math.floor(result).toString().length;
-            displayField.textContent = `${result.toFixed(decimals)}`
+            if (result - Math.floor(result) === 0) result = roundIntegerResultToNineDigits(result), displayField.textContent = result;
+            else {
+              let decimals = 9 - Math.floor(result).toString().length;
+              displayField.textContent = `${result.toFixed(decimals)}`
+            } 
           }
           inputNumOne = result;
           inputNumTwo = "";
